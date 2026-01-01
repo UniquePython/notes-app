@@ -16,13 +16,11 @@ auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
 def login():
     data = request.get_json() or {}
     email, password = get_email_password(data)
-    result = login_user(email, password)
-    return result
+    return login_user(email, password), 200
 
 
 @auth_bp.route("/register", methods=["POST"])
 def register():
     data = request.get_json() or {}
     email, password = get_email_password(data)
-    result = register_user(email, password)
-    return result
+    return register_user(email, password), 201

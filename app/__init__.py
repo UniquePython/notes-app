@@ -16,4 +16,12 @@ def create_app():
     for bp in bps:
         app.register_blueprint(bp)
     
+    @app.errorhandler(ValueError)
+    def handle_value_error(e):
+        return {"error": str(e)}, 400
+
+    @app.errorhandler(Exception)
+    def handle_generic_error(e):
+        return {"error": "Internal server error"}, 500
+    
     return app
