@@ -1,0 +1,3 @@
+"""
+Defines tables, relationships, etc.
+"""
