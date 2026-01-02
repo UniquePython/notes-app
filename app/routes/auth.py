@@ -6,7 +6,7 @@ No business logic should live here.
 from flask import Blueprint, request
 
 from app.services.auth_service import login_user, register_user
-from app.utils.auth_utils import get_email_password
+from app.utils.auth import get_email_password
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")

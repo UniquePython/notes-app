@@ -3,9 +3,10 @@ Business logic related to authentication lives here.
 Routes should call these functions instead of implementing logic themselves.
 """
 
-from app.utils.auth_utils import validate_email_password
+from app.utils.auth import validate_email_password
 from app.models import User, db
 from app.utils.security import hash_password, verify_password
+from app.utils.jwt import create_token
 
 
 def login_user(email, password):
@@ -20,6 +21,7 @@ def login_user(email, password):
         
     return {
         "message": "login successful",
+        "token": create_token(user.id)
     }
 
 
