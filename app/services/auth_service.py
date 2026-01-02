@@ -5,16 +5,21 @@ Routes should call these functions instead of implementing logic themselves.
 
 from app.utils.auth_utils import validate_email_password
 from app.models import User, db
-from app.utils.security import hash_password
+from app.utils.security import hash_password, verify_password
 
 
 def login_user(email, password):
-    # Placeholder logic
     validate_email_password(email, password)
     
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        raise ValueError("Invalid email")
+    
+    if not verify_password(password, user.password_hash):
+        raise ValueError("Invalid password")
+        
     return {
-        "message": "login service called",
-        "email": email
+        "message": "login successful",
     }
 
 
@@ -31,6 +36,5 @@ def register_user(email, password):
     db.session.commit()
     
     return {
-        "message": "register service called",
-        "email": email
+        "message": "register successful",
     }
