@@ -1,4 +1,4 @@
-from app.services.auth_service import login_user, register_user
+from app.services.auth import login_user, register_user
 
 
 def test_login_user():

@@ -5,11 +5,11 @@ from flask import current_app
 
 def create_token(user_id: int) -> str:
     payload = {
-        "sub": user_id,
+        "sub": str(user_id),
         "iat": datetime.now(timezone.utc),
         "exp": datetime.now(timezone.utc) + timedelta(hours=1)
     }
-
+    
     return jwt.encode(
         payload,
         current_app.config["SECRET_KEY"],
@@ -17,8 +17,13 @@ def create_token(user_id: int) -> str:
     )
 
 def decode_token(token: str) -> dict:
-    return jwt.decode(
-        token,
-        current_app.config["SECRET_KEY"],
-        algorithms=[current_app.config["JWT_ALGORITHM"]]
-    )
+    try:
+        return jwt.decode(
+            token,
+            current_app.config["SECRET_KEY"],
+            algorithms=[current_app.config["JWT_ALGORITHM"]]
+        )
+    except jwt.ExpiredSignatureError:
+        raise ValueError("Token expired")
+    except jwt.InvalidTokenError:
+        raise ValueError("Invalid token")
