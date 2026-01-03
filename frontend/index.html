@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Notes App</title>
+    </head>
+    <body>
+
+        <h2>Register</h2>
+        <input id="reg-email" placeholder="email" />
+        <input id="reg-password" placeholder="password" type="password" />
+        <button onclick="register()">Register</button>
+
+        <h2>Login</h2>
+        <input id="login-email" placeholder="email" />
+        <input id="login-password" placeholder="password" type="password" />
+        <button onclick="login()">Login</button>
+        <button onclick="logout()">Logout</button>
+
+        <h2>Create Note</h2>
+        <input id="create-note-title" placeholder="title" />
+        <textarea id="create-note-content" placeholder="content"></textarea>
+        <button onclick="createNote()">Create</button>
+
+        <h2>My Note/(s)</h2>
+        <input type="number" id="list-note-id" placeholder="Enter note id (-1 for all notes)" value="-1" />
+        <button onclick="loadNotes()">Refresh</button>
+        <ul id="notes"></ul>
+
+        <h2>Edit Note</h2>
+        <input type="number" id="edit-note-id" placeholder="Enter note id" />
+        <input id="edit-note-title" placeholder="title" />
+        <textarea id="edit-note-content" placeholder="content"></textarea>
+        <button onclick="editNote()">Edit</button>
+
+        <h2>Delete Note</h2>
+        <input type="number" id="delete-note-id" placeholder="Enter note id" />
+        <button onclick="deleteNote()">Delete</button>
+
+        <script src="app.js"></script>
+    </body>
+</html>

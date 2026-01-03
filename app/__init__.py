@@ -6,12 +6,14 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask
+from flask_cors import CORS
 from app.models import db
 from .config import Config
 
 
 def create_app():
     app = Flask(__name__.split(".")[0])
+    CORS(app)
     app.config.from_object(Config)
 
     
